@@ -32,8 +32,8 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 #####Methods
 
-- load(**Buffer**)
-- scale(**height**, **callback**)
+- load(*Buffer*)
+- scale(*height*, *callback*)
 
 #####Events
 
@@ -44,7 +44,7 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 #####Methods
 
-- encode(**mode**, **Picture**)
+- encode(*mode*, *Picture*)
 
 #####Events
 
@@ -53,7 +53,7 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 ####SSTV.Modes
 
-Mode identifiers for use with **SSTV.Encoder.encode(mode, picture)**.
+Mode identifiers for use with *SSTV.Encoder.encode(mode, picture)*.
 
 #####Properties
 
