@@ -50,13 +50,13 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 #####Properties
 
-	- ROBOT_BW_8
-	- ROBOT_BW_12
-	- ROBOT_COLOR_36
-	- ROBOT_COLOR_72
-	- MARTIN_1
-	- MARTIN_2
-	- SCOTTIE_1
-	- SCOTTIE_2
-	- SCOTTIE_DX
-	- FAX480
+- ROBOT_BW_8
+- ROBOT_BW_12
+- ROBOT_COLOR_36
+- ROBOT_COLOR_72
+- MARTIN_1
+- MARTIN_2
+- SCOTTIE_1
+- SCOTTIE_2
+- SCOTTIE_DX
+- FAX480
