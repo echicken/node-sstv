@@ -8,11 +8,14 @@ var fs = require('fs'),
 
 function play(pcm) { speaker.write(pcm); }
 
-function onParse() {
+function onParse(err) {
+	if (err !== null) {
+		console.log(err);
+		return;
+	}
 	for (var m in SSTV.Modes) {
 		var encoder = new SSTV.Encoder();
-		encoder.on('data', play);
-		encoder.encode(SSTV.Modes[m], this);
+		encoder.encode(SSTV.Modes[m], this, play);
 	}
 }
 
@@ -20,7 +23,8 @@ function onRead(err, data) {
 	if (err !== null) {
 		console.log(err);
     } else {
-		new SSTV.Picture(data).on('ready', onParse);
+		var picture = new SSTV.Picture();
+		picture.load(data, onParse);
 	}
 }
 
@@ -30,18 +34,26 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 ####SSTV.Picture
 
+```js
+var picture = new SSTV.Picture(*Buffer*);
+```
+
 #####Methods
-- load(*Buffer*)
-- scale(*height*, *callback*)
+- load(*Buffer*, [,*callback*])
+	- Load an image from a Buffer into this *SSTV.Picture* instance.
+	- The *Buffer* argument must contain raw PNG, JPEG, or BMP data, eg. as read from a file.
+	- The *this* context for the callback function will be that of this instance of *SSTV.Picture*.
 
 #####Events
+- error
 - ready
-
+	- The *ready* event is fired once the picutre passed to the constructor (or to the *.load* method) has been parsed.
+	- The *this* context for the *ready* callback function will be that of the *SSTV.Picture* object which fired the event.
 
 ####SSTV.Encoder
 
 #####Methods
-- encode(*mode*, *Picture* *[, callback]*)
+- encode(*mode*, *Picture* [, *callback*])
 
 #####Events
 - data
