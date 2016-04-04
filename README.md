@@ -30,30 +30,39 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 ####SSTV.Picture
 
-#####Properties
-
 #####Methods
 
+- load(**Buffer**)
+- scale(**height**, **callback**)
+
 #####Events
+
+- ready
 
 
 ####SSTV.Encoder
 
-#####Properties
-
 #####Methods
+
+- encode(**mode**, **Picture**)
 
 #####Events
 
+- data
+
 
 ####SSTV.Modes
+
+Mode identifiers for use with **SSTV.Encoder.encode(mode, picture)**.
 
 #####Properties
 
 - ROBOT_BW_8
 - ROBOT_BW_12
+	- Robot Research black & white 8 & 12 second modes
 - ROBOT_COLOR_36
 - ROBOT_COLOR_72
+	- Robot Research colour 36 & 72 second modes
 - MARTIN_1
 - MARTIN_2
 - SCOTTIE_1
