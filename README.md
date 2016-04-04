@@ -8,9 +8,7 @@ A Slow-Scan Television (SSTV) encoder for node.js.
 	- .ROBOT_BW_8
 	- .ROBOT_BW_12
 	- .ROBOT_COLOR_36
-	- .ROBOT_COLOUR_36
 	- .ROBOT_COLOR_72
-	- .ROBOT_COLOUR_72
 	- .MARTIN_1
 	- .MARTIN_2
 	- .SCOTTIE_1
