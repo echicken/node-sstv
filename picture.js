@@ -94,7 +94,7 @@ var Picture = function (data) {
 		callback.call(this);
 	}
 
-	this.load(data);
+	if (data instanceof Buffer) this.load(data);
 
 }
 util.inherits(Picture, EventEmitter);
