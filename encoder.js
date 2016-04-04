@@ -1,6 +1,10 @@
-var Modes = require('./modes.js');
+var util = require('util'),
+	EventEmitter = require('events'),
+	Modes = require('./modes.js');
 
 var Encoder = function (options) {
+
+	EventEmitter.call(this);
 
 	var self = this, tones = [], phase = 0;
 
@@ -66,10 +70,12 @@ var Encoder = function (options) {
 	this._finish = function () {
 		var ret = new Buffer(tones);
 		reset();
+		this.emit('data', ret);
 		return ret;
 	}
 
 }
+util.inherits(Encoder, EventEmitter);
 
 Encoder.prototype.RobotBW = function (variant, picture, callback) {
 
@@ -105,7 +111,8 @@ Encoder.prototype.RobotBW = function (variant, picture, callback) {
 	function encode() {
 		self._start(visCode);
 		picture.YUV_AF.forEach(scan);
-		callback(self._finish());
+		var data = self._finish();
+		if (typeof callback === 'function') callback(data);
 	}
 
 	picture.scale(120, encode);
@@ -180,7 +187,8 @@ Encoder.prototype.RobotColour = function (variant, picture, callback) {
 	function encode() {
 		self._start(visCode);
 		picture.YUV_AF.forEach(variant === 0 ? scan36 : scan72);
-		callback(self._finish());
+		var data = self._finish();
+		if (typeof callback === 'function') callback(data);
 	}
 
 	picture.scale(240, encode);
@@ -229,7 +237,8 @@ Encoder.prototype.Martin = function (variant, picture, callback) {
 	function encode() {
 		self._start(visCode);
 		picture.RGB_AF.forEach(cycle);
-		callback(self._finish());
+		var data = self._finish();
+		if (typeof callback === 'function') callback(data);
 	}
 
 	picture.scale(256, encode);
@@ -287,7 +296,8 @@ Encoder.prototype.Scottie = function (variant, picture, callback) {
 	function encode() {
 		self._start(visCode);
 		picture.RGB_AF.forEach(cycle);
-		callback(self._finish());
+		var data = self._finish();
+		if (typeof callback === 'function') callback(data);
 	}
 
 	picture.scale(256, encode);
@@ -325,7 +335,8 @@ Encoder.prototype.Fax480 = function (picture, callback) {
 			phasingInterval();
 		}
 		picture.YUV_AF.forEach(scan);
-		callback(self._finish());
+		var data = self._finish();
+		if (typeof callback === 'function') callback(data);
 	}
 
 	picture.scale(480, encode);
