@@ -1,21 +1,6 @@
 # node-sstv
 A Slow-Scan Television (SSTV) encoder for node.js.
 
-- SSTV.Picture({ type : String ('png' or 'jpeg'), data : Buffer }, callback)
-- SSTV.Encoder()
-	- .encode(mode, picture, callback)
-- SSTV.Modes
-	- .ROBOT_BW_8
-	- .ROBOT_BW_12
-	- .ROBOT_COLOR_36
-	- .ROBOT_COLOR_72
-	- .MARTIN_1
-	- .MARTIN_2
-	- .SCOTTIE_1
-	- .SCOTTIE_2
-	- .SCOTTIE_DX
-	- .FAX480
-
 ```js
 var fs = require('fs'),
     Speaker = require('speaker'), // npm install speaker
@@ -42,3 +27,36 @@ function onRead(err, data) {
 var speaker = new Speaker({ channels : 1, bitDepth : 16, sampleRate : 44100 });
 fs.readFile('/path/to/some/picture.png', onRead);
 ```
+
+####SSTV.Picture
+
+#####Properties
+
+#####Methods
+
+#####Events
+
+
+####SSTV.Encoder
+
+#####Properties
+
+#####Methods
+
+#####Events
+
+
+####SSTV.Modes
+
+#####Properties
+
+	- ROBOT_BW_8
+	- ROBOT_BW_12
+	- ROBOT_COLOR_36
+	- ROBOT_COLOR_72
+	- MARTIN_1
+	- MARTIN_2
+	- SCOTTIE_1
+	- SCOTTIE_2
+	- SCOTTIE_DX
+	- FAX480
