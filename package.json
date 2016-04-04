@@ -10,9 +10,7 @@
 		"node" : ">=0.10"
 	},
 	"dependencies": {
-		"sharp" : "0.13.x",
-		"pngjs" : "2.2.x",
-		"jpeg-js" : "0.1.x"
+		"jimp" : "0.2.x"
 	},
 	"keywords" : [ "sstv" ],
 	"version" : "0.1.0"
