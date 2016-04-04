@@ -18,25 +18,27 @@ A Slow-Scan Television (SSTV) encoder for node.js.
 
 ```js
 var fs = require('fs'),
-	Speaker = require('speaker'), // npm install speaker
-	SSTV = require('sstv');
+    Speaker = require('speaker'), // npm install speaker
+    SSTV = require('./index.js');
 
 function play(pcm) { speaker.write(pcm); }
 
 function onParse() {
-	var encoder = new SSTV.Encoder();
-	encoder.encode(SSTV.Modes.ROBOT_COLOR_36, this, play);
+	for (var m in SSTV.Modes) {
+		var encoder = new SSTV.Encoder();
+		encoder.on('data', play);
+		encoder.encode(SSTV.Modes[m], this);
+	}
 }
 
 function onRead(err, data) {
 	if (err !== null) {
 		console.log(err);
-		return;
+    } else {
+		new SSTV.Picture(data).on('ready', onParse);
 	}
-	var picture = new SSTV.Picture({ type : 'png', data : data }, onParse);
 }
 
 var speaker = new Speaker({ channels : 1, bitDepth : 16, sampleRate : 44100 });
-
 fs.readFile('/path/to/some/picture.png', onRead);
 ```
