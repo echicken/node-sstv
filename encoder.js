@@ -1,6 +1,7 @@
 var util = require('util'),
 	EventEmitter = require('events'),
-	Modes = require('./modes.js');
+	Modes = require('./modes.js'),
+	Picture = require('./picture.js');
 
 var Encoder = function (options) {
 
@@ -343,7 +344,7 @@ Encoder.prototype.Fax480 = function (picture, callback) {
 
 }
 
-Encoder.prototype.encode = function (mode, picture, callback) {
+Encoder.prototype.generate = function (mode, picture, callback) {
 	switch (mode) {
 		case Modes.ROBOT_BW_8:
 			this.RobotBW(0, picture, callback);
@@ -380,6 +381,14 @@ Encoder.prototype.encode = function (mode, picture, callback) {
 		default:
 			break;
 	}
+}
+
+Encoder.prototype.encode = function (mode, buffer, callback) {
+	var self = this;
+	var picture = new Picture();
+	picture.on('error', function (err) { self.emit('error', err); });
+	picture.on('ready', function () { self.generate(mode, this, callback); });
+	picture.load(buffer);
 }
 
 module.exports = Encoder;
