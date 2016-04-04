@@ -34,15 +34,13 @@ fs.readFile('/path/to/some/picture.png', onRead);
 
 ####SSTV.Picture
 
-```js
-var picture = new SSTV.Picture(*Buffer*);
-```
+Translates an image into data that *SSTV.Encoder* can use.
 
 #####Methods
 - load(*Buffer*, [,*callback*])
-	- Load an image from a Buffer into this *SSTV.Picture* instance.
+	- Load an image from a *Buffer* into this *SSTV.Picture* instance.
 	- The *Buffer* argument must contain raw PNG, JPEG, or BMP data, eg. as read from a file.
-	- The *this* context for the callback function will be that of this instance of *SSTV.Picture*.
+	- The *this* context for the optional *callback* function will be that of this instance of *SSTV.Picture*.
 
 #####Events
 - error
@@ -50,14 +48,23 @@ var picture = new SSTV.Picture(*Buffer*);
 	- The *ready* event is fired once the picutre passed to the constructor (or to the *.load* method) has been parsed.
 	- The *this* context for the *ready* callback function will be that of the *SSTV.Picture* object which fired the event.
 
+You can also optionally pass a *Buffer* into the *SSTV.Picture* constructor to have it load an image immediately:
+
+```js
+new SSTV.Picture(data).on('ready', function () { /* Do something */ });
+```
+
 ####SSTV.Encoder
+
+Produces a *Buffer* of PCM audio data based on an *SSTV.Picture* instance.
 
 #####Methods
 - encode(*mode*, *Picture* [, *callback*])
+	- Optional function *callback* will receive one argument, a *Buffer* containing PCM audio data.
 
 #####Events
 - data
-
+	- The *data* event is fired once the image has been encoded as audio.  Listener will receive one argument, a *Buffer* containing PCM audio data.
 
 ####SSTV.Modes
 
