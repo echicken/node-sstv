@@ -37,7 +37,7 @@ fs.readFile('/path/to/some/picture.png', onRead);
 Translates an image into data that *SSTV.Encoder* can use.
 
 #####Methods
-- load(*Buffer*, [,*callback*])
+- load(*Buffer* [,*callback*])
 	- Load an image from a *Buffer* into this *SSTV.Picture* instance.
 	- The *Buffer* argument must contain raw PNG, JPEG, or BMP data, eg. as read from a file.
 	- The *this* context for the optional *callback* function will be that of this instance of *SSTV.Picture*.
@@ -69,6 +69,8 @@ Produces a *Buffer* of PCM audio data based on an *SSTV.Picture* instance.
 ####SSTV.Modes
 
 Mode identifiers for use with *SSTV.Encoder.encode(mode, picture)*.
+
+I can easily add some more modes if anybody wants them
 
 #####Properties
 
